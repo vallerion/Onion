@@ -28,7 +28,7 @@ class Route {
 
         $path = __DIR__ . '/../../Controllers/' . $controller_name . '.php';
 
-        asd();
+
         require_once $path;
 
         $controller = new $controller_name();

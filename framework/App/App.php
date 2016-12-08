@@ -7,9 +7,7 @@ use Support\Singleton;
 use Http\Routing\Router;
 use Http\Request;
 use Http\Response;
-use App\Route;
-
-use Database\ORM;
+use Database\DB;
 
 class App extends Singleton {
 
@@ -18,6 +16,8 @@ class App extends Singleton {
     private $request;
 
     private $response;
+
+    private $db;
 
     private $config = [];
 
@@ -29,6 +29,10 @@ class App extends Singleton {
         $this->request = Request::getInstance();
 
         $this->response = Response::getInstance();
+
+        $this->db = DB::getInstance();
+
+
 
         $this->setConfig();
 
@@ -63,9 +67,12 @@ class App extends Singleton {
 
         $config = $this->config['connections'][$connection_name];
 
-        ORM::configure("$connection_name:host={$config['host']};dbname={$config['database']}");
-        ORM::configure('username', $config['username']);
-        ORM::configure('password', $config['password']);
+
+        DB::pushConnection('cms', 'mysql', $config['host'], $config['port'], $config['database'], $config['username'] . ':' . $config['password']);
+        DB::pushConnection('labki', 'mysql', $config['host'], $config['port'], 'labki', $config['username'] . ':' . $config['password']);
+
+
+        
     }
 
     public function __toString() : string {

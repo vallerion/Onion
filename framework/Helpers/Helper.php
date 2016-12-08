@@ -21,4 +21,20 @@ class Helper{
 
     }
 
+    public static function show($arg) {
+
+        echo '<pre>';
+        echo htmlspecialchars($arg);
+        echo '</pre><br>';
+    }
+
+    public static function showDie($arg) {
+
+        echo '<pre>';
+        echo htmlspecialchars($arg);
+        echo '</pre><br>';
+
+        exit;
+    }
+
 }
