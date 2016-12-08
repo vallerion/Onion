@@ -11,15 +11,6 @@ $autoloader->add('Support', __DIR__ . '/../framework/Support');
 $autoloader->add('Traits', __DIR__ . '/../framework/Traits');
 $autoloader->add('App', __DIR__ . '/../framework/App');
 $autoloader->add('Database', __DIR__ . '/../framework/Database');
-//$autoloader->add('Controllers', __DIR__ . '/../Controllers');
+$autoloader->add('Psr', __DIR__ . '/../framework/Psr');
 
 $autoloader->register();
-
-//spl_autoload_register(function ($class) {
-//
-//    echo $class;
-//
-//    $class = str_replace('\\', '/', $class);
-//
-//    include __DIR__ . "/$class.php";
-//});

@@ -7,6 +7,7 @@ class Autoloader {
     protected $map = [];
 
     public function add($namespace, $rootDir) {
+
         if (is_dir($rootDir)) {
             $this->map[$namespace] = $rootDir;
             return true;
@@ -26,6 +27,7 @@ class Autoloader {
 
         if (is_array($pathParts)) {
             $namespace = array_shift($pathParts);
+            
 
             if ( ! empty($this->map[$namespace])) {
                 $filePath = $this->map[$namespace] . '/' . implode('/', $pathParts) . '.php';
