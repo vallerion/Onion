@@ -1,9 +1,9 @@
 <?php
 
-namespace Http;
+namespace Framework\Http;
 
 //use Helpers\Helper;
-use Support\Singleton;
+use Framework\Support\Singleton;
 
 class Request extends Singleton{
 

@@ -1,6 +1,6 @@
 <?php
 
-    namespace Database;
+    namespace Framework\Database;
 
     use ArrayAccess,
         Exception,

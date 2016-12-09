@@ -1,11 +1,9 @@
 <?php
 
-namespace Http;
+namespace Framework\Http;
 
-//require __DIR__ . '/../Traits/Codes.php';
-
-use Support\Singleton;
-use Traits\Codes;
+use Framework\Support\Singleton;
+use Framework\Traits\Codes;
 
 class Response extends Singleton {
     

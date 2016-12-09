@@ -9,7 +9,7 @@ $loader = new Autoloader();
       $loader->register();
 
       // register the base directories for the namespace prefix
-      $loader->addNamespace('App', __DIR__ . '/../Framework/App');
+      $loader->addNamespace('Framework', __DIR__ . '/../Framework');
 //      $loader->addNamespace('Foo\Bar', '/path/to/packages/foo-bar/tests');
 
 //$autoloader = new Autoloader();

@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace Framework\App;
 
-use Helpers\Helper;
-use Support\Singleton;
-use Http\Routing\Router;
-use Http\Request;
-use Http\Response;
-use Database\DB;
+use Framework\Helpers\Helper;
+use Framework\Support\Singleton;
+use Framework\Http\Routing\Router;
+use Framework\Http\Request;
+use Framework\Http\Response;
+use Framework\Database\DB;
 
 class App extends Singleton {
 

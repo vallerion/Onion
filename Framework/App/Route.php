@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace Framework\App;
 
-use Helpers\Helper;
-use Http\Routing\Router;
+use Framework\Helpers\Helper;
+use Framework\Http\Routing\Router;
 
 class Route {
 

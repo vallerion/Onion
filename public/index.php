@@ -2,9 +2,9 @@
 
 require __DIR__ . '/../autoload/autoload.php';
 
-use App\App;
-use Database\DB;
-use Database\ORM;
+use Framework\App\App;
+use Framework\Database\DB;
+use Framework\Database\ORM;
 
 
 
@@ -13,23 +13,23 @@ $app = App::getInstance();
 try {
     $app->run();
 
-    DB::setCurrentConnection('cms');
-
-    DB::query("
-        CREATE TABLE IF NOT EXISTS contact (
-            id INTEGER PRIMARY KEY, 
-            name TEXT, 
-            email TEXT 
-        );");
-
-    DB::setCurrentConnection('labki');
-
-    DB::query("
-        CREATE TABLE IF NOT EXISTS contact (
-            id INTEGER PRIMARY KEY, 
-            name TEXT, 
-            email TEXT 
-        );");
+//    DB::setCurrentConnection('cms');
+//
+//    DB::query("
+//        CREATE TABLE IF NOT EXISTS contact (
+//            id INTEGER PRIMARY KEY,
+//            name TEXT,
+//            email TEXT
+//        );");
+//
+//    DB::setCurrentConnection('labki');
+//
+//    DB::query("
+//        CREATE TABLE IF NOT EXISTS contact (
+//            id INTEGER PRIMARY KEY,
+//            name TEXT,
+//            email TEXT
+//        );");
 }
 catch(Throwable $ex){
 

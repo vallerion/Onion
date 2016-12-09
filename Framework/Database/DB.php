@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Database;
+namespace Framework\Database;
 
-use Database\Connection\Connection;
-use Helpers\Helper;
-use Support\Singleton;
-use Database\Connection\ConnectionPool;
+use Framework\Database\Connection\Connection;
+use Framework\Helpers\Helper;
+use Framework\Support\Singleton;
+use Framework\Database\Connection\ConnectionPool;
 
-use Database\ORM;
+use Framework\Database\ORM;
 
 class DB extends Singleton {
 

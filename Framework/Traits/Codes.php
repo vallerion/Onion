@@ -1,6 +1,6 @@
 <?php
 
-namespace Traits;
+namespace Framework\Traits;
 
 Trait Codes {
     
