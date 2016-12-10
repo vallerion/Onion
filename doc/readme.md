@@ -6,11 +6,12 @@ EasyCms Engine Doc
 - [2. Database](#1-database)
 - [2.1 DB class](#11-db-class)
 - [2.2 ORM class](#12-orm-class)
+- [3 Localization](#3-localization)
 
 
 ## 1. Routing
 Define routes in file route.php.
-Example usage:
+#### Examples:
 ```php
 $route->get('user/{id}/show/{hash}', function($id, $hash) {
     echo "id: $id<br>";
@@ -28,7 +29,7 @@ more information: [git][php_routing].
 ## 2. Database
 ### 2.1. DB class
 DB - main class for working with database.
-Example usage:
+#### Examples:
 ```php
 
 use Framework\Database\DB;
@@ -67,6 +68,32 @@ DB::query("
 ### 2.2. ORM class
 ORM - is class [idiorm] ([doc][idiorm_doc]).
 
+
+## 3. Localization
+Just enter locales in config file lang.php
+#### Examples:
+```php
+return [
+    'ru',
+    'en'
+];
+```
+This means that lang line files will be searched in respective folder (for name).
+Write to lang file (ex. test.php):
+```php
+return [
+    // ...
+    'hello' => 'Hello, {name}!'
+];
+```
+Next use Locale class
+```php
+Locale::set('en'); // set current locale
+
+Locale::trans('test.hello', [ 'name' => 'Sanny' ]); // Hello, Sanny!
+// test - name of lang file
+// hello -  name of lang line
+```
 
 [idiorm]:      https://github.com/j4mie/idiorm
 [idiorm_doc]:         http://idiorm.readthedocs.io/en/latest/index.html

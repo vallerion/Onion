@@ -44,11 +44,7 @@ class App {
         $this->table = Table::getInstance();
 
         $this->locale = Locale::getInstance();
-
-        Locale::set('en');
-
-        Locale::trans('module.hello', [ 'name' => 'Sanny' ]);
-
+        
 
         $this->setConfig();
 
