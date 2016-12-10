@@ -14,8 +14,6 @@
 
 return [
 
-    'UserTable' => 'users',
-
-    'PageTable' => 'pages'
+    'UserTable' => 'users'
 
 ];
