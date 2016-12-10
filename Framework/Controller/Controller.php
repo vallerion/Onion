@@ -7,7 +7,7 @@ use Framework\Http\Response;
 
 class Controller {
 
-    protected $enabled = false;
+    protected $enabled = true;
 
     protected $isModule = false;
 

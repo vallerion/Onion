@@ -24,6 +24,8 @@ class App {
 
     private $table;
 
+    private $locale;
+
     private $configApp = [];
 
     private $configDb = [];
@@ -40,6 +42,12 @@ class App {
         $this->db = DB::getInstance();
 
         $this->table = Table::getInstance();
+
+        $this->locale = Locale::getInstance();
+
+        Locale::set('en');
+
+        Locale::trans('module.hello', [ 'name' => 'Sanny' ]);
 
 
         $this->setConfig();

@@ -14,11 +14,11 @@
 
 return [
 
-    'user' => [
+    'admin' => [
 
         'users' =>
         [
-            'name' => 'Пользователи', // todo: 'name' => '{locale.module.user_name}'
+            'name' => '{locale.module.user_name}',
             'about' => 'Что-то про модуль',
             'access' => 'user', // todo: можно оставлять пустым
             'url' => '/user/' // todo: /user/{self.id}
@@ -26,7 +26,7 @@ return [
     ],
 
 
-    'admin' => [
+    'user' => [
 
 
     ]

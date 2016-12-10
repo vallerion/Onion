@@ -2,6 +2,8 @@
 
 return [
     
-    'user_name' => 'Users'
+    'user_name' => 'Users',
+
+    'hello' => 'Hello, {name}!'
     
 ];

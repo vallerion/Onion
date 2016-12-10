@@ -7,13 +7,6 @@ use Framework\Controller\Controller;
 
 class UserController extends Controller{
 
-    public function __construct() {
-
-        $this->enabled = true;
-
-        parent::__construct();
-    }
-
     public function index($id) {
         echo $id;
     }
