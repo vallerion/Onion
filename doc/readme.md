@@ -3,9 +3,9 @@ EasyCms Engine Doc
 
 ## Navigate
 - [1. Routing](#1-routing)
-- [2. Database](#1-database)
-- [2.1 DB class](#11-db-class)
-- [2.2 ORM class](#12-orm-class)
+- [2. Database](#2-database)
+- [2.1 DB class](#21-db-class)
+- [2.2 ORM class](#22-orm-class)
 - [3 Localization](#3-localization)
 
 
