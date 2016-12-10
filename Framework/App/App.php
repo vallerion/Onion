@@ -67,7 +67,7 @@ class App extends Singleton {
         $connections = $this->configDb;
 
         foreach ($connections as $key => $value){
-            DB::pushConnection($key, $value['driver'], $value['host'], $value['port'], $value['database'], $value['username'] . ':' . $value['password'], strpos($value['mode'], 'write'), strpos($value['mode'], 'read'));
+            DB::pushConnection($key, $value['driver'], $value['host'], $value['port'], $value['database'], $value['username'] . ':' . $value['password'], stristr($value['mode'], 'write'), stristr($value['mode'], 'read'));
         }
 
 //        $config = $this->config['connections'][$connection_name];

@@ -21,9 +21,9 @@ class DB extends Singleton {
     }
 
 
-    public static function pushConnection($nameConnection, $driver, $host, $port, $database, $user) {
+    public static function pushConnection($nameConnection, $driver, $host, $port, $database, $user, $write = true, $read = true) {
 
-        $connection = new Connection($nameConnection, $driver, $host, $port, $database, $user);
+        $connection = new Connection($nameConnection, $driver, $host, $port, $database, $user, $write, $read);
 
         static::$connectionPool[$nameConnection] = $connection;
 
@@ -35,8 +35,6 @@ class DB extends Singleton {
     protected static function updateConnection() {
 
         $connection = static::getCurrentConnection();
-
-//        Helper::show($connection->driver());
 
         ORM::configure( $connection->driver() . ":host={$connection->host()};dbname={$connection->database()}", null, $connection->name());
         ORM::configure('username', $connection->user(), $connection->name());
@@ -50,6 +48,8 @@ class DB extends Singleton {
     }
 
     public static function getCurrentConnection() {
+
+        echo static::$currentConnection;
         return static::$currentConnection;
     }
 
