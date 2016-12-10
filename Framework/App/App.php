@@ -44,7 +44,7 @@ class App {
 
         $this->setConfig();
 
-        $this->setDatabaseConfig();
+        $this->makeDbConnections();
 
     }
 
@@ -68,21 +68,13 @@ class App {
         $this->configDb =  include __DIR__ . '/../../config/db.php';
     }
 
-    protected function setDatabaseConfig() {
+    protected function makeDbConnections() {
 
         $connections = $this->configDb;
 
         foreach ($connections as $key => $value){
             DB::pushConnection($key, $value['driver'], $value['host'], $value['port'], $value['database'], $value['username'] . ':' . $value['password'], stristr($value['mode'], 'write'), stristr($value['mode'], 'read'));
         }
-
-//        $config = $this->config['connections'][$connection_name];
-//
-//
-//        DB::pushConnection('cms', 'mysql', $config['host'], $config['port'], $config['database'], $config['username'] . ':' . $config['password']);
-//        DB::pushConnection('testDB', 'mysql', $config['host'], $config['port'], 'testDB', $config['username'] . ':' . $config['password']);
-
-
         
     }
 
