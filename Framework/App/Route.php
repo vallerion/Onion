@@ -29,8 +29,10 @@ class Route {
 
         $path = __DIR__ . '/../../Controllers/' . $controller_folder . '/' . $controller_name . '.php';
 
-
-        require_once $path;
+        if(file_exists($path))
+            require_once $path;
+        else
+            throw new \Exception('Controller not exist! File: <b>' . $path . '</b>');
 
         $controller = new $controller_name();
 
