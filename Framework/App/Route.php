@@ -36,9 +36,11 @@ class Route {
 
         $controller = new $controller_name();
 
-        return $this->router->$name($pattern, [  $controller, $controller_method ]);
+        if($controller->enabled()) {
+            return $this->router->$name($pattern, [  $controller, $controller_method ]);
+        }
 
-//        Helper::dumperDie(is_callable([  $controller, $controller_method ] ));
+        return false;
     }
 
     protected function getControllerMethod(string $param) {

@@ -2,9 +2,17 @@
 
 use Framework\Database\DB;
 use Framework\Database\Table;
+use Framework\Controller\Controller;
 
 
-class UserController {
+class UserController extends Controller{
+
+    public function __construct() {
+
+        $this->enabled = true;
+
+        parent::__construct();
+    }
 
     public function index($id) {
         echo $id;
@@ -20,7 +28,8 @@ class UserController {
                 'password' => '123',
                 'email' => 'asd'
             ]
-        )->save();
+        );
+        $newUser->save();
 
     }
 
