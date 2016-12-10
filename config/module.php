@@ -2,14 +2,10 @@
 
 
 /**
- * list of alias name => real table name in db
+ * admin - modules that see only admin user(super user)
  *
- * Usage:
- *
- * just call as static method Table class
- *
- * ex: Table::UserTable(); // users
- *
+ * user - modules that see other user
+ * 
  */
 
 return [
