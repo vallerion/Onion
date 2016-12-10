@@ -2,11 +2,12 @@
 
 namespace Framework\Http;
 
-use Framework\Support\Singleton;
+use Framework\Traits\Singleton;
 use Framework\Traits\Codes;
 
-class Response extends Singleton {
-    
+class Response {
+
+    use Singleton;
     use Codes;
 
     protected $status;

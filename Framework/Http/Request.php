@@ -2,10 +2,11 @@
 
 namespace Framework\Http;
 
-//use Helpers\Helper;
-use Framework\Support\Singleton;
+use Framework\Traits\Singleton;
 
-class Request extends Singleton{
+class Request {
+
+    use Singleton;
 
     const METHOD_HEAD = 'HEAD';
     const METHOD_GET = 'GET';

@@ -3,13 +3,16 @@
 namespace Framework\App;
 
 use Framework\Helpers\Helper;
-use Framework\Support\Singleton;
+use Framework\Traits\Singleton;
 use Framework\Http\Routing\Router;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Database\DB;
+use Framework\Database\Table;
 
-class App extends Singleton {
+class App {
+
+    use Singleton;
 
     private $router;
 
@@ -18,6 +21,8 @@ class App extends Singleton {
     private $response;
 
     private $db;
+
+    private $table;
 
     private $configApp = [];
 
@@ -34,6 +39,7 @@ class App extends Singleton {
 
         $this->db = DB::getInstance();
 
+        $this->table = Table::getInstance();
 
 
         $this->setConfig();

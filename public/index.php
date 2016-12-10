@@ -5,6 +5,7 @@ require __DIR__ . '/../autoload/autoload.php';
 use Framework\App\App;
 use Framework\Database\DB;
 use Framework\Database\ORM;
+use Framework\Database\Table;
 
 
 
@@ -12,6 +13,8 @@ $app = App::getInstance();
 
 try {
     $app->run();
+
+//    \Framework\Helpers\Helper::dumperDie(Table::$UserTable);
 }
 catch(Throwable $ex){
 

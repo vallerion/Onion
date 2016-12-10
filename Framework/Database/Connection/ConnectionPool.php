@@ -3,10 +3,14 @@
 namespace Framework\Database\Connection;
 
 use ArrayAccess;
-use Support\Singleton;
+use Framework\Traits\Singleton;
 
 
-class ConnectionPool extends Singleton implements ArrayAccess {
+class ConnectionPool implements ArrayAccess {
+
+
+
+    use Singleton;
 
 
     protected $container = [];

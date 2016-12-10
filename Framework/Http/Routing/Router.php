@@ -5,9 +5,11 @@ namespace Framework\Http\Routing;
 use Framework\Helpers\Helper;
 use Framework\Http\Request;
 use Framework\Http\Response;
-use Framework\Support\Singleton;
+use Framework\Traits\Singleton;
 
-class Router extends Singleton{
+class Router {
+
+    use Singleton;
 
     protected $routes = [];
 

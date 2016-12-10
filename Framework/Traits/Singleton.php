@@ -1,10 +1,10 @@
 <?php
 
-namespace Framework\Support;
+namespace Framework\Traits;
 
-class Singleton{
+trait Singleton {
 
-    protected static $instance;
+    protected static $instance = null;
 
     protected function __construct(){
 
@@ -21,5 +21,4 @@ class Singleton{
 
         return static::$instance;
     }
-
 }

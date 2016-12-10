@@ -5,12 +5,14 @@ namespace Framework\Database;
 
 use Framework\Database\Connection\Connection;
 use Framework\Helpers\Helper;
-use Framework\Support\Singleton;
+use Framework\Traits\Singleton;
 use Framework\Database\Connection\ConnectionPool;
 
 use Framework\Database\ORM;
 
-class DB extends Singleton {
+class DB {
+
+    use Singleton;
 
     protected static $connectionPool;
 
@@ -48,8 +50,6 @@ class DB extends Singleton {
     }
 
     public static function getCurrentConnection() {
-
-        echo static::$currentConnection;
         return static::$currentConnection;
     }
 
