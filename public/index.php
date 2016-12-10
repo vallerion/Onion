@@ -13,8 +13,6 @@ $app = App::getInstance();
 
 try {
     $app->run();
-
-//    \Framework\Helpers\Helper::dumperDie(Table::$UserTable);
 }
 catch(Throwable $ex){
 

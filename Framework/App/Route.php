@@ -23,10 +23,11 @@ class Route {
 
         $controller_data = $this->getControllerMethod($callback);
 
+        $controller_folder = $controller_data['folder'];
         $controller_name = $controller_data['name'];
         $controller_method = $controller_data['method'];
 
-        $path = __DIR__ . '/../../Controllers/' . $controller_name . '.php';
+        $path = __DIR__ . '/../../Controllers/' . $controller_folder . '/' . $controller_name . '.php';
 
 
         require_once $path;
@@ -40,9 +41,10 @@ class Route {
 
     protected function getControllerMethod(string $param) {
 
-        list($controller_name, $controller_method) = explode('@', $param);
+        list($controller_area, $controller_name, $controller_method) = explode('@', $param);
 
         return [
+            'folder' => strtolower($controller_area),
             'name' => $controller_name,
             'method' => $controller_method
         ];
