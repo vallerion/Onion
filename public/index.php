@@ -12,24 +12,6 @@ $app = App::getInstance();
 
 try {
     $app->run();
-
-//    DB::setCurrentConnection('cms');
-//
-//    DB::query("
-//        CREATE TABLE IF NOT EXISTS contact (
-//            id INTEGER PRIMARY KEY,
-//            name TEXT,
-//            email TEXT
-//        );");
-//
-//    DB::setCurrentConnection('labki');
-//
-//    DB::query("
-//        CREATE TABLE IF NOT EXISTS contact (
-//            id INTEGER PRIMARY KEY,
-//            name TEXT,
-//            email TEXT
-//        );");
 }
 catch(Throwable $ex){
 

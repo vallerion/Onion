@@ -22,6 +22,12 @@ class Connection {
 
     protected $user;
 
+    protected $name;
+
+    protected $write;
+
+    protected $read;
+
 
     public function __call($name, $arguments) {
 
@@ -43,11 +49,13 @@ class Connection {
     }
 
 
-    public function __construct($driver, $host, $port, $database, $user) {
+    public function __construct($name, $driver, $host, $port, $database, $user, $write = true, $read = true) {
+
 
         if( ! in_array($driver, $this->validDrivers))
             throw new Exception('In ' . __METHOD__ . ' invalid database driver.');
 
+        $this->name = $name;
         $this->driver = $driver;
         $this->host = $host;
         $this->port = $port;

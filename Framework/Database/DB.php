@@ -23,13 +23,13 @@ class DB extends Singleton {
 
     public static function pushConnection($nameConnection, $driver, $host, $port, $database, $user) {
 
-        $connection = new Connection($driver, $host, $port, $database, $user);
+        $connection = new Connection($nameConnection, $driver, $host, $port, $database, $user);
 
         static::$connectionPool[$nameConnection] = $connection;
 
         static::setCurrentConnection($nameConnection);
 
-        static::updateConnection();
+//        static::updateConnection();
     }
 
     protected static function updateConnection() {
@@ -38,9 +38,9 @@ class DB extends Singleton {
 
 //        Helper::show($connection->driver());
 
-        ORM::configure( $connection->driver() . ":host={$connection->host()};dbname={$connection->database()}");
-        ORM::configure('username', $connection->user());
-        ORM::configure('password', $connection->password());
+        ORM::configure( $connection->driver() . ":host={$connection->host()};dbname={$connection->database()}", null, $connection->name());
+        ORM::configure('username', $connection->user(), $connection->name());
+        ORM::configure('password', $connection->password(), $connection->name());
     }
 
     public static function setCurrentConnection($name) {
@@ -54,13 +54,17 @@ class DB extends Singleton {
     }
 
 
-    public static function query(string $query) : bool {
+    public static function query(string $query) {
 
-        $pdo = ORM::get_db();
+        $pdo = ORM::get_db(static::$currentConnection->name());
 
-        $result = (bool)$pdo->exec($query);
+        $result = $pdo->query($query);
 
         return $result;
+    }
+
+    public static function table($tableName){
+        return ORM::for_table($tableName, static::$currentConnection->name());
     }
 
 

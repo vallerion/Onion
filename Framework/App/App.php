@@ -19,7 +19,9 @@ class App extends Singleton {
 
     private $db;
 
-    private $config = [];
+    private $configApp = [];
+
+    private $configDb = [];
 
 
     protected function __construct() {
@@ -37,8 +39,6 @@ class App extends Singleton {
         $this->setConfig();
 
         $this->setDatabaseConfig();
-
-//        Helper::dumperDie($this->config);
 
     }
 
@@ -58,18 +58,23 @@ class App extends Singleton {
     }
 
     protected function setConfig() {
-        $this->config =  include __DIR__ . '/../config/config.php';
+        $this->configApp =  include __DIR__ . '/../config/config.php';
+        $this->configDb =  include __DIR__ . '/../../config/db.php';
     }
 
     protected function setDatabaseConfig() {
 
-        $connection_name = $this->config['connection'];
+        $connections = $this->configDb;
 
-        $config = $this->config['connections'][$connection_name];
+        foreach ($connections as $key => $value){
+            DB::pushConnection($key, $value['driver'], $value['host'], $value['port'], $value['database'], $value['username'] . ':' . $value['password'], strpos($value['mode'], 'write'), strpos($value['mode'], 'read'));
+        }
 
-
-        DB::pushConnection('cms', 'mysql', $config['host'], $config['port'], $config['database'], $config['username'] . ':' . $config['password']);
-        DB::pushConnection('labki', 'mysql', $config['host'], $config['port'], 'labki', $config['username'] . ':' . $config['password']);
+//        $config = $this->config['connections'][$connection_name];
+//
+//
+//        DB::pushConnection('cms', 'mysql', $config['host'], $config['port'], $config['database'], $config['username'] . ':' . $config['password']);
+//        DB::pushConnection('testDB', 'mysql', $config['host'], $config['port'], 'testDB', $config['username'] . ':' . $config['password']);
 
 
         
@@ -83,7 +88,7 @@ class App extends Singleton {
     }
 
     public function debug() {
-        return $this->config['debug'];
+        return $this->configApp['debug'];
     }
 
 
