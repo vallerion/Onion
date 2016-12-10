@@ -20,14 +20,23 @@ class Route {
         if( is_callable($callback) )
             return $this->router->$name($pattern, $callback);
 
+        
 
-        $controller_data = $this->getControllerMethod($callback);
+        $arguments = explode('@', $callback);
 
-        $controller_folder = $controller_data['folder'];
-        $controller_name = $controller_data['name'];
-        $controller_method = $controller_data['method'];
+        if(count($arguments) === 2){
 
-        $path = __DIR__ . '/../../Controllers/' . $controller_folder . '/' . $controller_name . '.php';
+            list($controller_name, $controller_method) = $arguments;
+
+            $path = __DIR__ . '/../../Controllers/' . $controller_name . '.php';
+        }
+        else if(count($arguments) === 3){
+
+            list($controller_folder, $controller_name, $controller_method) = $arguments;
+
+            $path = __DIR__ . '/../../Controllers/' . $controller_folder . '/' . $controller_name . '.php';
+        }
+
 
         if(file_exists($path))
             require_once $path;
