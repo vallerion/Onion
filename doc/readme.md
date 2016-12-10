@@ -66,7 +66,7 @@ DB::query("
 ```
 
 ### 2.2. ORM class
-ORM - is class [idiorm] ([doc][idiorm_doc]).
+ORM - is class [idiorm].
 
 
 ## 3. Localization
@@ -96,5 +96,4 @@ Locale::trans('test.hello', [ 'name' => 'Sanny' ]); // Hello, Sanny!
 ```
 
 [idiorm]:      https://github.com/j4mie/idiorm
-[idiorm_doc]:         http://idiorm.readthedocs.io/en/latest/index.html
 [php_routing]:         https://github.com/valerion1/php_routing
