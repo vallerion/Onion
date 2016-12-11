@@ -7,6 +7,7 @@ EasyCms Engine Doc
 - [2.1 DB class](#21-db-class)
 - [2.2 ORM class](#22-orm-class)
 - [3 Localization](#3-localization)
+- [4 Template engine - Twig](#3-tamplate-engine-twig)
 
 
 ## 1. Routing
@@ -110,5 +111,11 @@ Locale::trans('test.hello', [ 'name' => 'Sanny' ]); // Hello, Sanny!
 // hello -  name of lang line
 ```
 
-[idiorm]:      https://github.com/j4mie/idiorm
-[php_routing]:         https://github.com/valerion1/php_routing
+## 3. Template engine - Twig
+Documentation: [Twig][twig]
+Plugin for phpstorm: [link][phpstorm_twig]
+
+[idiorm]:               https://github.com/j4mie/idiorm
+[php_routing]:          https://github.com/valerion1/php_routing
+[phpstorm_twig]:        https://blog.jetbrains.com/phpstorm/2013/06/twig-support-in-phpstorm/
+[twig]:                 http://twig.sensiolabs.org/
