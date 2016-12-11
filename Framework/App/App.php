@@ -26,12 +26,19 @@ class App {
 
     private $locale;
 
+    private $auth;
+
     private $configApp = [];
 
     private $configDb = [];
 
 
     protected function __construct() {
+
+
+        $this->setConfig();
+
+        $this->auth = Auth::getInstance($this->config('session_name'));
 
         $this->router = Router::getInstance();
 
@@ -44,9 +51,6 @@ class App {
         $this->table = Table::getInstance();
 
         $this->locale = Locale::getInstance();
-
-
-        $this->setConfig();
 
         $this->makeDbConnections();
 
@@ -74,7 +78,7 @@ class App {
     }
 
     protected function setConfig() {
-        $this->configApp =  include __DIR__ . '/../config/config.php';
+        $this->configApp =  include __DIR__ . '/../../config/env.php';
         $this->configDb =  include __DIR__ . '/../../config/db.php';
     }
 
@@ -96,7 +100,11 @@ class App {
     }
 
     public function debug() {
-        return $this->configApp['debug'];
+        return (bool)$this->configApp['debug'];
+    }
+
+    public function config($parameter) {
+        return isset($this->configApp[$parameter]) ? $this->configApp[$parameter] : false;
     }
 
 

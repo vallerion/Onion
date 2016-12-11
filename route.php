@@ -1,6 +1,6 @@
 <?php
 
-
+$route->get('/user/create', 'user@UserController@create');
 
 $route->get('user/{id}', 'user@UserController@index');
 
@@ -9,7 +9,9 @@ $route->get('user/{id}/show/{hash}', function($id, $hash) {
     echo "hash: $hash<br>";
 });
 
-$route->get('/user/create', 'user@UserController@create');
+
+
+$route->post('login', 'user@UserController@login');
 
 $route->get('cpanel', 'PageController@cpanel');
 

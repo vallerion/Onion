@@ -195,6 +195,11 @@ class Request extends Message implements ServerRequestInterface {
     }
 
 
+    public function __get($name) {
+        return isset($this->fields[$name]) ?
+            $this->fields[$name] : null;
+    }
+
 
     public function getRequestTarget() {
         return $this->getUri();
@@ -258,6 +263,10 @@ class Request extends Message implements ServerRequestInterface {
     
     public function cookie() {
         // TODO: must return Cookie object
+    }
+
+    public function session() {
+        // todo: must return Session object
     }
 
     public function getQueryParams() {
