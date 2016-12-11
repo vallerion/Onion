@@ -99,7 +99,10 @@ class Response extends Message implements ResponseInterface{
     public function isEmpty() {
         return in_array($this->getStatusCode(), [204, 205, 304]);
     }
-    
+
+    public function write($data) {
+        $this->body .= $data;
+    }
     
     
     public function getStatusCode() {

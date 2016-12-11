@@ -10,6 +10,6 @@ $route->get('cpanel', 'PageController@cpanel');
 
 $route->get('redirect', 'PageController@redirect');
 
-$route->get('/', function() {
-    echo 'hi';
+$route->get('/', function() use($response) {
+    $response->write('Hello!');
 });

@@ -65,6 +65,8 @@ class App {
     protected function routing() {
 
         $route = new Route($this->router);
+        $response = $this->response;
+        $request = $this->request;
 
         require __DIR__ . '/../../route.php';
 

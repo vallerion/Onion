@@ -21,6 +21,10 @@ $route->get('user/{id}/show/{hash}', function($id, $hash) {
 $route->post('user/{id}', function($id) {
     echo "id: $id<br>";
 });
+
+$route->put('/', function() use($response) {
+    $response->write('THIS IS PUT!');
+});
 ```
 
 more information: [git][php_routing].
