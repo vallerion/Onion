@@ -11,7 +11,7 @@ trait Singleton {
     }
 
     private function __clone(){
-
+        return static::$instance;
     }
 
     public static function getInstance(...$params){
