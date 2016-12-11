@@ -3,14 +3,14 @@
 namespace Framework\Http;
 
 use Framework\Helpers\Helper;
+use Framework\Psr\Http\Message\ResponseInterface;
 use Framework\Traits\Singleton;
 use Framework\Traits\Codes;
-use Framework\Psr\Http\Message\RequestInterface;
 use Framework\Psr\Http\Message\UriInterface;
 
 use InvalidArgumentException;
 
-class Response extends Message implements RequestInterface {
+class Response extends Message implements ResponseInterface{
 
     use Singleton;
     use Codes;
@@ -23,7 +23,7 @@ class Response extends Message implements RequestInterface {
 
     protected $cookies;
 
-    protected $body;
+//    protected $body;
 
     protected $length;
 
@@ -86,7 +86,7 @@ class Response extends Message implements RequestInterface {
 
     public function reasonPhrase($reasonPhrase = null) {
 
-        if( ! is_null($reasonPhrase))
+        if( ! is_null($reasonPhrase) && ! empty($reasonPhrase))
             $this->reasonPhrase = $reasonPhrase;
 
         return $this->reasonPhrase;
@@ -99,34 +99,20 @@ class Response extends Message implements RequestInterface {
     public function isEmpty() {
         return in_array($this->getStatusCode(), [204, 205, 304]);
     }
-
-    public function getRequestTarget() {
-        // TODO: Implement getRequestTarget() method.
+    
+    
+    
+    public function getStatusCode() {
+        return $this->status();
     }
 
-    public function withRequestTarget($requestTarget)
-    {
-        // TODO: Implement withRequestTarget() method.
+    public function withStatus($code, $reasonPhrase = '') {
+        $this->status($code);
+        $this->reasonPhrase($reasonPhrase);
     }
 
-    public function getMethod()
-    {
-        // TODO: Implement getMethod() method.
-    }
-
-    public function withMethod($method)
-    {
-        // TODO: Implement withMethod() method.
-    }
-
-    public function getUri()
-    {
-        // TODO: Implement getUri() method.
-    }
-
-    public function withUri(UriInterface $uri, $preserveHost = false)
-    {
-        // TODO: Implement withUri() method.
+    public function getReasonPhrase() {
+        return $this->reasonPhrase();
     }
 
     public function respond() {
