@@ -25,3 +25,8 @@ $route->any('/', function() use($response, $request) {
         $response->write('Hello!');
     
 });
+
+$route->get('cookie', function() use($response, $request) {
+//    $response->cookie('name', 'vla');
+//    $response->cookie('a', 'b', ['expires' => time()+3600, 'path' => 'cookie']);
+});

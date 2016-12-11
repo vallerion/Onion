@@ -21,7 +21,7 @@ class Response extends Message implements ResponseInterface {
 
 //    protected $headers;
 
-    protected $cookies;
+    protected $cookies = [];
 
 //    protected $body;
 
@@ -103,6 +103,74 @@ class Response extends Message implements ResponseInterface {
     public function write($data) {
         $this->body .= $data;
     }
+
+
+    /**
+     *
+     * usage:
+     *
+     * $response->cookie('a', 'b', ['expires' => time()+3600, 'path' => 'home']);
+     *
+     * @param $name
+     * @param $value
+     * @param array $property
+     */
+    public function cookie($name, $value, $property = []) {
+
+        $value = ['value' => (string)$value];
+        if( ! empty($property))
+            $value = array_merge($value, $property);
+
+//        $this->cookies[$name] = array_replace($this->cookies, $value);
+        $this->cookies[$name] = $value;
+    }
+
+    protected function cookiesToHeaders() {
+        $headers = [];
+        foreach ($this->cookies as $name => $properties) {
+            $headers[] = $this->cookiesToHeader($name, $properties);
+        }
+
+        return $headers;
+    }
+
+    protected function cookiesToHeader($name, $properties) {
+
+        $result = urlencode($name) . '=' . urlencode($properties['value']);
+
+        if (isset($properties['domain'])) {
+            $result .= '; domain=' . $properties['domain'];
+        }
+
+        if (isset($properties['path'])) {
+            $result .= '; path=' . $properties['path'];
+        }
+
+        if (isset($properties['expires'])) {
+            if (is_string($properties['expires'])) {
+                $timestamp = strtotime($properties['expires']);
+            } else {
+                $timestamp = (int)$properties['expires'];
+            }
+            if ($timestamp !== 0) {
+                $result .= '; expires=' . gmdate('D, d-M-Y H:i:s e', $timestamp);
+            }
+        }
+
+        if (isset($properties['secure']) && $properties['secure']) {
+            $result .= '; secure';
+        }
+
+        if (isset($properties['hostonly']) && $properties['hostonly']) {
+            $result .= '; HostOnly';
+        }
+
+        if (isset($properties['httponly']) && $properties['httponly']) {
+            $result .= '; HttpOnly';
+        }
+
+        return $result;
+    }
     
     
     public function getStatusCode() {
@@ -119,6 +187,11 @@ class Response extends Message implements ResponseInterface {
     }
 
     public function respond() {
+
+        $cookie = $this->cookiesToHeaders();
+
+        $this->withAddedHeader('Set-Cookie', $cookie);
+
         if( ! headers_sent()){
 
             header(sprintf(
@@ -130,7 +203,13 @@ class Response extends Message implements ResponseInterface {
 
 //            $output .= PHP_EOL;
             foreach ($this->getHeaders() as $name => $values) {
-                header(sprintf('%s: %s', $name, $this->getHeader($name)), false);
+
+                if(is_array($values))
+                    foreach ($values as $val) {
+                        header(sprintf('%s: %s', $name, $val), false);
+                    }
+                else
+                    header(sprintf('%s: %s', $name, $this->getHeader($name)), false);
             }
 
 
@@ -139,20 +218,7 @@ class Response extends Message implements ResponseInterface {
 
     public function __toString() {
 
-//        $output = sprintf(
-//            'HTTP/%s %s %s',
-//            $this->getProtocolVersion(),
-//            $this->status(),
-//            $this->reasonPhrase()
-//        );
-//
-//        $output .= PHP_EOL;
-//        foreach ($this->getHeaders() as $name => $values) {
-//            $output .= sprintf('%s: %s', $name, $this->getHeader($name)) . PHP_EOL;
-//        }
-//        $output .= PHP_EOL;
         $output = (string)$this->getBody();
-//        Helper::dumperDie($output);
 
         return $output;
     }

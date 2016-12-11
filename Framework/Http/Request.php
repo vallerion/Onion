@@ -45,6 +45,8 @@ class Request extends Message implements ServerRequestInterface {
 
     protected $uploadFiles;
 
+    protected $queryParams;
+
 
     protected function __construct(array $userSettings = []) {
 
@@ -119,6 +121,8 @@ class Request extends Message implements ServerRequestInterface {
         if($input === false)
             throw new \Exception('Can`t get data by ' . $this->method);
 
+        $this->queryParams = $this->headers['QUERY_STRING'];
+
         $this->body = $this->setBody($input);
 
         $this->fields = array_diff($_REQUEST, $_COOKIE); // all but cookie
@@ -152,12 +156,12 @@ class Request extends Message implements ServerRequestInterface {
 
     public function headers() {
         
-        if(empty(self::$headers)){
-            self::setDefaultEnvironment();
-            self::setCurrentEnvironment();
+        if(empty($this->headers)){
+            $this->headers = $this->makeDefaultHeaders();
+            $this->setCurrentHeaders();
         }
 
-        return self::$headers;
+        return $this->headers;
     }
 
     public function getUri() {
@@ -248,6 +252,18 @@ class Request extends Message implements ServerRequestInterface {
         return $this->uploadFiles;
     }
 
+    public function getCookieParams() {
+        return $this->cookie;
+    }
+    
+    public function cookie() {
+        // TODO: must return Cookie object
+    }
+
+    public function getQueryParams() {
+        return $this->queryParams;
+    }
+
 
 
 
@@ -256,17 +272,11 @@ class Request extends Message implements ServerRequestInterface {
         // TODO: Implement getServerParams() method.
     }
 
-    public function getCookieParams() {
-        // TODO: Implement getCookieParams() method.
-    }
-
     public function withCookieParams(array $cookies) {
         // TODO: Implement withCookieParams() method.
     }
 
-    public function getQueryParams() {
-        // TODO: Implement getQueryParams() method.
-    }
+
 
     public function withQueryParams(array $query) {
         // TODO: Implement withQueryParams() method.

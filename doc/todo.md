@@ -17,3 +17,5 @@ create object module class and module container. Look loadModules, processModule
     - getError()
     - getClientFilename()
     - getClientMediaType()
+
+- 4. Create class Cookie, Session
