@@ -19,3 +19,4 @@ create object module class and module container. Look loadModules, processModule
     - getClientMediaType()
 
 - 4. Create class Cookie, Session
+http://php.net/manual/ru/class.sessionhandler.php
