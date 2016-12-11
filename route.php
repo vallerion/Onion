@@ -8,6 +8,8 @@ $route->get('/user/create', 'user@UserController@create');
 
 $route->get('cpanel', 'PageController@cpanel');
 
+$route->get('redirect', 'PageController@redirect');
+
 $route->get('/', function() {
     echo 'hi';
 });

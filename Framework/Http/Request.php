@@ -15,7 +15,7 @@ class Request {
     const METHOD_PATCH = 'PATCH';
     const METHOD_DELETE = 'DELETE';
 
-    protected static $env = [];
+    protected static $headers = [];
 
     protected $method;
 
@@ -38,44 +38,44 @@ class Request {
         $this->setQueryData();
 
         if( ! empty($userSettings))
-            self::$env = array_merge(self::$env, $userSettings);
+            self::$headers = array_merge(self::$headers, $userSettings);
 
     }
 
     private static function setCurrentEnvironment() {
 
-        self::$env['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'];
+        self::$headers['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'];
 
-        self::$env['QUERY_STRING'] = urldecode($_SERVER['QUERY_STRING']); // example.com/page/?a=b&c=d -> a=b&c=d
+        self::$headers['QUERY_STRING'] = urldecode($_SERVER['QUERY_STRING']); // example.com/page/?a=b&c=d -> a=b&c=d
 
-        self::$env['REQUEST_URI_FULL'] = urldecode($_SERVER['REQUEST_URI']);
+        self::$headers['REQUEST_URI_FULL'] = urldecode($_SERVER['REQUEST_URI']);
 
-        self::$env['REQUEST_URI'] = str_replace([self::$env['QUERY_STRING'], '?'], '', self::$env['REQUEST_URI_FULL']); // example.com/page/?a=b&c=d -> /page/
+        self::$headers['REQUEST_URI'] = str_replace([self::$headers['QUERY_STRING'], '?'], '', self::$headers['REQUEST_URI_FULL']); // example.com/page/?a=b&c=d -> /page/
 
-        self::$env['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? 80;
+        self::$headers['SERVER_PORT'] = $_SERVER['SERVER_PORT'] ?? 80;
 
-        self::$env['SCRIPT_NAME'] = $_SERVER['SCRIPT_NAME'];
+        self::$headers['SCRIPT_NAME'] = $_SERVER['SCRIPT_NAME'];
 
-        self::$env['SERVER_SOFTWARE'] = $_SERVER['SERVER_SOFTWARE'] ?? '';
+        self::$headers['SERVER_SOFTWARE'] = $_SERVER['SERVER_SOFTWARE'] ?? '';
 
-        self::$env['CONTENT_LENGTH'] = $_SERVER['CONTENT_LENGTH'];
+        self::$headers['CONTENT_LENGTH'] = $_SERVER['CONTENT_LENGTH'];
 
-        self::$env['CONTENT_TYPE'] = $_SERVER['CONTENT_TYPE'];
+        self::$headers['CONTENT_TYPE'] = $_SERVER['CONTENT_TYPE'];
 
-        self::$env['USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
+        self::$headers['USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
 
-        self::$env['ACCEPT'] = $_SERVER['HTTP_ACCEPT'];
+        self::$headers['ACCEPT'] = $_SERVER['HTTP_ACCEPT'];
 
-        self::$env['PATH_INFO'] = $_SERVER['PATH_INFO'];
+        self::$headers['PATH_INFO'] = $_SERVER['PATH_INFO'];
 
-//        self::$env['COOKIE'] = $_SERVER['HTTP_COOKIE'];
+//        self::$headers['COOKIE'] = $_SERVER['HTTP_COOKIE'];
 
-        self::$env['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
+        self::$headers['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
     }
 
     private static function setDefaultEnvironment() {
 
-        self::$env = [
+        self::$headers = [
             'REQUEST_METHOD' => 'GET',
             'SCRIPT_NAME' => '',
             'PATH_INFO' => '',
@@ -109,26 +109,26 @@ class Request {
 
     }
 
-    public function getEnvironment() : array {
+    public function headers() {
         
-        if(empty(self::$env)){
+        if(empty(self::$headers)){
             self::setDefaultEnvironment();
             self::setCurrentEnvironment();
         }
 
-        return self::$env;
+        return self::$headers;
     }
 
     public function getUri() : string {
-        return self::$env['REQUEST_URI'];
+        return self::$headers['REQUEST_URI'];
     }
 
     public function getUriFull() : string {
-        return self::$env['REQUEST_URI_FULL'];
+        return self::$headers['REQUEST_URI_FULL'];
     }
 
     public function getMethod() : string {
-        return self::$env['REQUEST_METHOD'];
+        return self::$headers['REQUEST_METHOD'];
     }
 
 }

@@ -44,7 +44,7 @@ class App {
         $this->table = Table::getInstance();
 
         $this->locale = Locale::getInstance();
-        
+
 
         $this->setConfig();
 
@@ -56,6 +56,10 @@ class App {
 
         $this->routing();
 
+
+        $this->response->respond();
+
+        print $this;
     }
 
     protected function routing() {
@@ -82,11 +86,11 @@ class App {
         
     }
 
-    public function __toString() : string {
+    public function __toString() {
 
 //        $result = (string)$this->response;
 
-        return '';
+        return (string)$this->response;
     }
 
     public function debug() {

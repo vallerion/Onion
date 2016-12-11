@@ -20,5 +20,3 @@ catch(Throwable $ex){
     if($app->debug())
         print $ex;
 }
-
-print $app;
