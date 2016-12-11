@@ -25,6 +25,17 @@ $route->post('user/{id}', function($id) {
 $route->put('/', function() use($response) {
     $response->write('THIS IS PUT!');
 });
+
+$route->any('/page', function() use($response, $request) {
+
+    if($request->isJson())
+        $response->write('Hello Json Statham!');
+    else if($request->isMedia())
+        $response->write('Files: ' . print_r($request->getUploadedFiles(), true));
+    else
+        $response->write('Hello!');
+
+});
 ```
 
 more information: [git][php_routing].

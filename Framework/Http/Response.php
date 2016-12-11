@@ -10,10 +10,10 @@ use Framework\Psr\Http\Message\UriInterface;
 
 use InvalidArgumentException;
 
-class Response extends Message implements ResponseInterface{
+class Response extends Message implements ResponseInterface {
 
     use Singleton;
-    use Codes;
+    use Codes; // todo: what for trait Codes?
 
     protected $status = 200;
 
