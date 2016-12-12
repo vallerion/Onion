@@ -8,6 +8,7 @@ use Framework\Traits\Singleton;
 use Framework\Traits\Codes;
 use Framework\Psr\Http\Message\UriInterface;
 
+use Framework\View\View;
 use InvalidArgumentException;
 
 class Response extends Message implements ResponseInterface {
@@ -27,6 +28,8 @@ class Response extends Message implements ResponseInterface {
 
     protected $length;
 
+    protected $view;
+
     protected function __construct($status = 200, $headers = null, $body = null) {
 
         $this->status = $this->normalizeStatusCode($status);
@@ -35,6 +38,8 @@ class Response extends Message implements ResponseInterface {
         $this->setCurrentHeaders();
 
         $this->body = $body;
+
+        $this->view = View::getInstance();
 
 //        Helper::dumperDie($this->headers);
     }
@@ -102,6 +107,10 @@ class Response extends Message implements ResponseInterface {
 
     public function write($data) {
         $this->body .= $data;
+    }
+
+    public function view($template, $values = []) {
+        $this->view->template($template, $values);
     }
 
 
@@ -218,7 +227,9 @@ class Response extends Message implements ResponseInterface {
 
     public function __toString() {
 
-        $output = (string)$this->getBody();
+        $output = (string)$this->view->render();
+
+        $output .= (string)$this->getBody();
 
         return $output;
     }

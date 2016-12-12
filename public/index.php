@@ -9,19 +9,20 @@ use Framework\Database\Table;
 use Framework\View\View;
 
 
-$view = new View();
-echo $view->twig()->render('test.php.twig', ['title' => 'Fabien']);
+//$view = new View();
+//$view->template('rr.test', ['title' => 'AAAAAAAAAA']);
+//echo $view->render();
 
 
 
-//$app = App::getInstance();
-//
-//try {
-//    $app->run();
-//}
-//catch(Throwable $ex){
-//
-//    // todo: id debug_mode = on -> show exception else only log
-//    if($app->debug())
-//        print $ex;
-//}
+$app = App::getInstance();
+
+try {
+    $app->run();
+}
+catch(Throwable $ex){
+
+    // todo: id debug_mode = on -> show exception else only log
+    if($app->debug())
+        print $ex;
+}

@@ -34,3 +34,9 @@ $route->get('cookie', function() use($response, $request) {
 //    $response->cookie('name', 'vla');
 //    $response->cookie('a', 'b', ['expires' => time()+3600, 'path' => 'cookie']);
 });
+
+$route->get('template/1', function() use($response) {
+    $response->view('rr.test', ['title' => 'Page Title']);
+});
+
+$route->get('template/2', 'PageController@show');

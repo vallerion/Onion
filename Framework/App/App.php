@@ -9,6 +9,7 @@ use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Database\DB;
 use Framework\Database\Table;
+use Framework\View\View;
 
 class App {
 
@@ -27,6 +28,8 @@ class App {
     private $locale;
 
     private $auth;
+
+    private $view;
 
     private $configApp = [];
 
@@ -51,6 +54,8 @@ class App {
         $this->table = Table::getInstance();
 
         $this->locale = Locale::getInstance();
+
+        $this->view = View::getInstance();
 
         $this->makeDbConnections();
 
@@ -93,9 +98,6 @@ class App {
     }
 
     public function __toString() {
-
-//        $result = (string)$this->response;
-
         return (string)$this->response;
     }
 

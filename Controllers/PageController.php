@@ -17,5 +17,9 @@ class PageController extends Controller {
 
         \Framework\Helpers\Helper::dumper($modules);
     }
+    
+    public function show() {
+        return $this->response->view('hello', ['name' => 'EasyCms Engine']);
+    }
 
 }
