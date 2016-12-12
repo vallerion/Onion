@@ -20,6 +20,7 @@ use Framework\View\Twig\Node\Expression\Binary\NodeExpressionBinaryConcat;
 use Framework\View\Twig\Node\Expression\NodeExpressionArray;
 use Framework\View\Twig\Node\Expression\NodeExpressionParent;
 use Framework\View\Twig\Node\Expression\NodeExpressionBlockReference;
+use Framework\View\Twig\Node\Expression\NodeExpressionFunction;
 
 /*
  * This file is part of Twig.
@@ -394,6 +395,8 @@ class ExpressionParser
                 $args = $this->parseArguments(true);
                 $class = $this->getFunctionNodeClass($name, $line);
 
+//                var_dump($class);exit;
+
                 return new $class($name, $args, $line);
         }
     }
@@ -698,14 +701,16 @@ class ExpressionParser
             }
             $message .= sprintf(' in %s at line %d.', $this->parser->getStream()->getSourceContext()->getName(), $line);
 
-            @trigger_error($message, E_USER_DEPRECATED);
+//            @trigger_error($message, E_USER_DEPRECATED);
         }
 
         if ($function instanceof SimpleFunction) {
             return $function->getNodeClass();
         }
 
-        return $function instanceof FunctionNode ? $function->getClass() : 'Node_Expression_Function';
+
+
+        return $function instanceof FunctionNode ? $function->getClass() : 'NodeExpressionFunction';
     }
 
     protected function getFilterNodeClass($name, $line)

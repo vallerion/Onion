@@ -133,7 +133,7 @@ class Environment
         $options = array_merge(array(
             'debug' => false,
             'charset' => 'UTF-8',
-            'base_template_class' => 'Template',
+            'base_template_class' => '\Framework\View\Twig\Template',
             'strict_variables' => false,
             'autoescape' => 'html',
             'cache' => false,
@@ -466,6 +466,10 @@ class Environment
                 }
 
                 $content = $this->compileSource($source);
+
+
+//                echo '<pre>';
+//                print_r($content);exit;
 
                 if ($this->bcWriteCacheFile) {
                     $this->writeCacheFile($key, $content);

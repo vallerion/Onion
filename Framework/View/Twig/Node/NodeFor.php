@@ -48,7 +48,7 @@ class NodeFor extends Node
         $compiler
             ->addDebugInfo($this)
             ->write("\$context['_parent'] = \$context;\n")
-            ->write("\$context['_seq'] = twig_ensure_traversable(")
+            ->write("\$context['_seq'] =  \\Framework\\View\\Twig\\Extension\\twig_ensure_traversable(")
             ->subcompile($this->getNode('seq'))
             ->raw(");\n")
         ;

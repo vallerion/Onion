@@ -35,7 +35,7 @@ class NodeModule extends Node
     public function __construct(NodeInterface $body, NodeExpression $parent = null, NodeInterface $blocks, NodeInterface $macros, NodeInterface $traits, $embeddedTemplates, $name, $source = '')
     {
         if (!$name instanceof Source) {
-            @trigger_error(sprintf('Passing a string as the $name argument of %s() is deprecated since version 1.27. Pass a Source instance instead.', __METHOD__), E_USER_DEPRECATED);
+//            @trigger_error(sprintf('Passing a string as the $name argument of %s() is deprecated since version 1.27. Pass a Source instance instead.', __METHOD__), E_USER_DEPRECATED);
             $this->source = new Source($source, $name);
         } else {
             $this->source = $name;
@@ -175,7 +175,7 @@ class NodeModule extends Node
     protected function compileConstructor(Compiler $compiler)
     {
         $compiler
-            ->write("public function __construct(Environment \$env)\n", "{\n")
+            ->write("public function __construct(\\Framework\\View\\Twig\\Environment \$env)\n", "{\n")
             ->indent()
             ->subcompile($this->getNode('constructor_start'))
             ->write("parent::__construct(\$env);\n\n")

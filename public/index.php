@@ -10,6 +10,7 @@ use Framework\View\View;
 
 
 $view = new View();
+echo $view->twig()->render('test.php.twig', ['title' => 'Fabien']);
 
 
 

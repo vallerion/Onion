@@ -34,7 +34,7 @@ class SimpleFunction
             'is_variadic' => false,
             'is_safe' => null,
             'is_safe_callback' => null,
-            'node_class' => 'NodeExpressionFunction',
+            'node_class' => '\Framework\View\Twig\Node\Expression\NodeExpressionFunction',
             'deprecated' => false,
             'alternative' => null,
         ), $options);
