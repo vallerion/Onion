@@ -6,8 +6,9 @@ EasyCms Engine Doc
 - [2. Database](#2-database)
 - [2.1 DB class](#21-db-class)
 - [2.2 ORM class](#22-orm-class)
-- [3 Localization](#3-localization)
-- [4 Template engine - Twig](#4-tamplate-engine-twig)
+- [3. Localization](#3-localization)
+- [4. Views](#4-views)
+- [4.1 Template engine - Twig](#4-template-engine-twig)
 
 
 ## 1. Routing
@@ -111,9 +112,25 @@ Locale::trans('test.hello', [ 'name' => 'Sanny' ]); // Hello, Sanny!
 // hello -  name of lang line
 ```
 
-## 4. Template engine - Twig
+## 4. Views
+### 4.1. Template engine - Twig
 Documentation: [Twig][twig]
 Plugin for phpstorm: [link][phpstorm_twig]
+### 4.2. Example
+in route:
+```php
+$route->get('template/1', function() use($response) {
+    $response->view('rr.test', ['title' => 'Page Title']);
+});
+```
+or in controller:
+```php
+$route->get('template/2', 'PageController@show');
+// ...
+public function show() {
+    return $this->response->view('hello', ['name' => 'EasyCms Engine']);
+}
+```
 
 [idiorm]:               https://github.com/j4mie/idiorm
 [php_routing]:          https://github.com/valerion1/php_routing
