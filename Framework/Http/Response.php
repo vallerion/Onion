@@ -220,6 +220,15 @@ class Response extends Message implements ResponseInterface {
         }
     }
 
+    public function json() {
+        return $this->withAddedHeader('Content-Type', 'application/json');
+    }
+
+    public function setBody($body) {
+        $this->body = $body;
+        return $this;
+    }
+
     public function __toString() {
 
         $output = (string)$this->view->render();

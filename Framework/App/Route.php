@@ -2,7 +2,6 @@
 
 namespace Framework\App;
 
-use Framework\Helpers\Helper;
 use Framework\Http\Routing\Router;
 
 class Route {
@@ -28,14 +27,16 @@ class Route {
 
             list($controller_name, $controller_method) = $arguments;
 
-            $path = __DIR__ . '/../../Controllers/' . $controller_name . '.php';
+            $path = __DIR__ . '/../../app/Controllers/' . $controller_name . '.php';
         }
         else if(count($arguments) === 3){
 
             list($controller_folder, $controller_name, $controller_method) = $arguments;
 
-            $path = __DIR__ . '/../../Controllers/' . $controller_folder . '/' . $controller_name . '.php';
+            $path = __DIR__ . '/../../app/Controllers/' . $controller_folder . '/' . $controller_name . '.php';
         }
+        else
+            throw new \InvalidArgumentException;
 
 
         if(file_exists($path))
@@ -54,12 +55,12 @@ class Route {
 
     protected function getControllerMethod(string $param) {
 
-        list($controller_area, $controller_name, $controller_method) = explode('@', $param);
+        list($controllerArea, $controllerName, $controllerMethod) = explode('@', $param);
 
         return [
-            'folder' => strtolower($controller_area),
-            'name' => $controller_name,
-            'method' => $controller_method
+            'folder' => strtolower($controllerArea),
+            'name' => $controllerName,
+            'method' => $controllerMethod
         ];
     }
 

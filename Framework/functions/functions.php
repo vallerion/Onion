@@ -6,7 +6,8 @@ if ( ! function_exists('dumper')) {
         $args = func_get_args();
 
         echo '<pre>';
-        echo htmlspecialchars(print_r($args, true));
+        foreach ($args as $arg)
+            echo htmlspecialchars(print_r($arg, true)) . chr(10);
         echo '</pre><hr>';
     }
 }
@@ -17,7 +18,8 @@ if ( ! function_exists('ddumper')) {
         $args = func_get_args();
 
         echo '<pre>';
-        echo htmlspecialchars(print_r($args, true));
+        foreach ($args as $arg)
+            echo htmlspecialchars(print_r($arg, true)) . chr(10);
         echo '</pre><hr>';
 
         die(1);
@@ -30,7 +32,8 @@ if ( ! function_exists('show')) {
         $args = func_get_args();
 
         echo '<pre>';
-        echo print_r($args, true);
+        foreach ($args as $arg)
+            echo print_r($arg, true) . chr(10);
         echo '</pre><hr>';
     }
 }

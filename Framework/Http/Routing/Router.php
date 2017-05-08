@@ -15,12 +15,12 @@ class Router {
 
     protected $request;
 
-    protected $responce;
+    protected $response;
 
     public function __construct() {
         $this->request = Request::getInstance();
 
-        $this->responce = Response::getInstance();
+        $this->response = Response::getInstance();
     }
 
     public function get(string $pattern, callable $callback) {
@@ -84,15 +84,13 @@ class Router {
 
             if(in_array($this->request->getMethod(), $route->getMethods()) && $route->comparePattern($this->request->getUri())) {
                 $dispatch = $route->dispatch();
-
-                if($dispatch)
-                    break;
+                
+                return $dispatch;
             }
             
         }
 
-        // TODO: return $responce->error(404);
-
+        $this->response->status(404);
     }
 
     /**

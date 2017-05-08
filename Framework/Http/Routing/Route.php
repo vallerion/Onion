@@ -109,13 +109,10 @@ class Route{
     /**
      * Invoke callback
      *
-     * @return bool
+     * @return mixed
      */
-    public function dispatch() : bool {
-
-        $result = call_user_func_array($this->getCallback(), array_values($this->parameters));
-
-        return $result === false ? false : true;
+    public function dispatch() {
+        return call_user_func_array($this->getCallback(), array_values($this->parameters));
     }
 
     /**

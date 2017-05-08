@@ -36,9 +36,6 @@ class ModuleManager {
         self::$modules =  include __DIR__ . '/../../config/module.php';
 
         foreach (self::$modules as &$group) {
-
-//            Helper::dumperDie($group['users']['name']);
-
             self::processModule($group);
         }
     }
@@ -46,10 +43,7 @@ class ModuleManager {
     protected static function processModule(&$group) {
         
         foreach ($group as &$module){
-
             $module['name'] = self::translateField($module['name']);
-
-//            Helper::dumperDie($module);
         }
 
     }

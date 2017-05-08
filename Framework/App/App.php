@@ -9,6 +9,7 @@ use Framework\Http\Response;
 use Framework\Database\DB;
 use Framework\Database\Table;
 use Framework\Log\Log;
+use Framework\View\View;
 
 class App {
 
@@ -50,15 +51,19 @@ class App {
         $this->table = Table::getInstance();
         $this->locale = Locale::getInstance();
         $this->log = Log::getInstance();
-//        $this->view = View::getInstance();
+        $this->view = View::getInstance();
 
         $this->makeDbConnections();
-
     }
 
     public function run() {
 
-        $this->routing();
+        $routeResponse = $this->routing();
+
+        if( ! is_string($routeResponse)) {
+            $this->response->json();
+            $this->response->setBody(json_encode($routeResponse));
+        }
 
         $this->response->respond();
 
@@ -73,7 +78,7 @@ class App {
 
         require __DIR__ . '/../../route.php';
 
-        $this->router->run();
+        return $this->router->run();
     }
 
     protected function setConfig() {
@@ -112,6 +117,10 @@ class App {
         return isset($this->configApp[$parameter]) ?
             $this->configApp[$parameter] :
             false;
+    }
+
+    public function __call($name, $arguments) {
+        return static::$instance->$name;
     }
 
 
