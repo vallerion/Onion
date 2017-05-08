@@ -57,7 +57,7 @@ if ( ! function_exists('url')) {
             $host = $request->host();
             $scheme = $request->scheme();
 
-            return "$scheme://$host/$path";
+            return "$scheme://" . preg_replace('#/+#', '/', "$host/$path");
         }
 
         return $path;
