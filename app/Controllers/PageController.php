@@ -14,8 +14,6 @@ class PageController extends Controller {
     public function cpanel() {
 
         $modules = ModuleManager::admin();
-
-        \Framework\Helpers\Helper::dumper($modules);
     }
     
     public function show() {
