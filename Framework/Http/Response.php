@@ -3,10 +3,10 @@
 namespace Framework\Http;
 
 use Framework\Helpers\Helper;
-use Framework\Psr\Http\Message\ResponseInterface;
 use Framework\Traits\Singleton;
-use Framework\Traits\Codes;
-use Framework\Psr\Http\Message\UriInterface;
+use Framework\Http\Traits\Codes;
+
+use Psr\Http\Message\ResponseInterface;
 
 use Framework\View\View;
 use InvalidArgumentException;

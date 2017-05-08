@@ -2,9 +2,8 @@
 
 namespace Framework\Http;
 
-use Framework\Helpers\Helper;
-use Framework\Psr\Http\Message\ServerRequestInterface;
-use Framework\Psr\Http\Message\UriInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
 use Framework\Traits\Singleton;
 
 use InvalidArgumentException;

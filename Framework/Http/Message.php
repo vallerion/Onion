@@ -1,8 +1,8 @@
 <?php
 namespace Framework\Http;
 
-use Framework\Psr\Http\Message\MessageInterface;
-use Framework\Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\StreamInterface;
 
 abstract class Message implements MessageInterface {
 

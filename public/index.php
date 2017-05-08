@@ -1,17 +1,9 @@
 <?php
 
-require __DIR__ . '/../autoload/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Framework\App\App;
-use Framework\Database\DB;
-use Framework\Database\ORM;
-use Framework\Database\Table;
-use Framework\View\View;
-
-
-//$view = new View();
-//$view->template('rr.test', ['title' => 'AAAAAAAAAA']);
-//echo $view->render();
+use Framework\Log\Log;
 
 
 
@@ -19,6 +11,12 @@ $app = App::getInstance();
 
 try {
     $app->run();
+
+    $log = Log::getInstance();
+
+    $log->write('atata');
+    $log->error('ALARM!');
+    $log->log('test')->error('this is test file');
 }
 catch(Throwable $ex){
 

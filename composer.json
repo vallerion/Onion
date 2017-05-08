@@ -1,0 +1,15 @@
+{
+    "name": "root/kyrsach.valera",
+    "require": {
+        "psr/http-message": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "Framework/",
+            "Controllers/"
+        ],
+        "files": [
+            "Framework/functions/functions.php"
+        ]
+    }
+}
