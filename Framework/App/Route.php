@@ -8,8 +8,15 @@ class Route {
 
     protected $router;
 
+    /**
+     * for controllers
+     */
+    protected $namespace;
+
     public function __construct(Router $router){
         $this->router = $router;
+
+        $this->namespace = 'App\Controllers\\';
     }
 
     public function __call(string $name, $arguments) {
@@ -44,6 +51,7 @@ class Route {
         else
             throw new \Exception('Controller not exist! File: <b>' . $path . '</b>');
 
+        $controller_name = $this->namespace . $controller_name;
         $controller = new $controller_name();
 
         if($controller->enabled()) {
