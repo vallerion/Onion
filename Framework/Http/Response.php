@@ -6,6 +6,7 @@ use Framework\Traits\Singleton;
 use Framework\Http\Traits\Codes;
 use Psr\Http\Message\ResponseInterface;
 use InvalidArgumentException;
+use Framework\View\View;
 
 class Response extends Message implements ResponseInterface {
 
