@@ -15,9 +15,11 @@ class PageController extends Controller {
         $users = DB::query('
             select * from users
         ');
+        
 
-        dumper($users);
-
+        return $this->response->view('index', [
+            'users' => $users
+        ]);
     }
 
 }

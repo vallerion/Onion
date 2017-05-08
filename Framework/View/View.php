@@ -15,7 +15,7 @@ class View {
             return $this->renderTemplate($template);
         else {
             $template = array_values($this->templates);
-            return isset($template[0]) ? $template->render() : '';
+            return isset($template[0]) ? $template[0]->render() : '';
         }
     }
 
@@ -28,7 +28,9 @@ class View {
     }
 
     public function template($template, array $values) {
-        $this->putTemplate($template);
+
+        if( ! isset($this->templates[$template]))
+            $this->putTemplate($template);
 
         foreach ($values as $key => $value)
             $this->templates[$template]->set($key, $value);

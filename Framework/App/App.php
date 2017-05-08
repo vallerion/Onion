@@ -59,11 +59,10 @@ class App {
     public function run() {
 
         $routeResponse = $this->routing();
-
-//        if( ! is_string($routeResponse)) {
-//            $this->response->json();
-//            $this->response->setBody(json_encode($routeResponse));
-//        }
+        
+        if($routeResponse && ! empty($routeResponse)) {
+            $this->response->setBody(json_encode($routeResponse));
+        }
 
         $this->response->respond();
 

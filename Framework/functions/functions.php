@@ -37,3 +37,29 @@ if ( ! function_exists('show')) {
         echo '</pre><hr>';
     }
 }
+
+if ( ! function_exists('template')) {
+    function template($file, array $args)
+    {
+        extract($args);
+
+        ob_start();
+        require($file);
+        return ob_get_clean();
+    }
+}
+
+if ( ! function_exists('url')) {
+    function url($path)
+    {
+        if (filter_var($path, FILTER_VALIDATE_URL) === FALSE) {
+            $request = \Framework\Http\Request::getInstance();
+            $host = $request->host();
+            $scheme = $request->scheme();
+
+            return "$scheme://$host/$path";
+        }
+
+        return $path;
+    }
+}

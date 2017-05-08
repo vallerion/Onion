@@ -89,6 +89,10 @@ class Request extends Message implements ServerRequestInterface {
 
         $this->headers['PATH_INFO'] = $_SERVER['PATH_INFO'];
 
+        $this->headers['HTTP_HOST'] = $_SERVER['HTTP_HOST'];
+
+        $this->headers['SCHEME'] = $_SERVER['REQUEST_SCHEME'];
+
 //        $this->headers['COOKIE'] = $_SERVER['HTTP_COOKIE'];
 
         $this->headers['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
@@ -102,6 +106,7 @@ class Request extends Message implements ServerRequestInterface {
             'PATH_INFO' => '',
             'QUERY_STRING' => '',
             'SERVER_NAME' => 'localhost',
+            'HTTP_HOST' => 'http://localhost',
             'SERVER_PORT' => 80,
             'ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'ACCEPT_LANGUAGE' => 'en-US,en;q=0.8',
@@ -163,12 +168,20 @@ class Request extends Message implements ServerRequestInterface {
         return $this->headers;
     }
 
+    public function host() {
+        return $this->headers['HTTP_HOST'];
+    }
+
+    public function scheme() {
+        return $this->headers['SCHEME'];
+    }
+
     public function getUri() {
         return $this->headers['REQUEST_URI'];
     }
 
     public function getUriFull() : string {
-        return self::$headers['REQUEST_URI_FULL'];
+        return $this->headers['REQUEST_URI_FULL'];
     }
 
     public function getMethod() : string {

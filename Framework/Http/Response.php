@@ -17,11 +17,7 @@ class Response extends Message implements ResponseInterface {
 
     protected $reasonPhrase; // ex. 404 Page non found
 
-//    protected $headers;
-
     protected $cookies = [];
-
-//    protected $body;
 
     protected $length;
 
@@ -34,7 +30,7 @@ class Response extends Message implements ResponseInterface {
         $this->headers = is_null($headers) ? $this->makeDefaultHeaders() : $headers;
         $this->setCurrentHeaders();
 
-        $this->body = $body;
+        $this->body = is_null($body) ? '' : $body;
 
         $this->view = View::getInstance();
     }

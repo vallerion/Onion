@@ -34,12 +34,7 @@ class Template {
     }
 
     public function render() {
-        $output = file_get_contents($this->file);
-
-        foreach ($this->values as $key => $value)
-            $output = str_replace("{@$key}", $value, $output);
-
-        return $output;
+        return template($this->file, $this->values);
     }
 
 
