@@ -2,14 +2,13 @@
 
 namespace Framework\App;
 
-use Framework\Helpers\Helper;
 use Framework\Traits\Singleton;
 use Framework\Http\Routing\Router;
 use Framework\Http\Request;
 use Framework\Http\Response;
 use Framework\Database\DB;
 use Framework\Database\Table;
-use Framework\View\View;
+use Framework\Log\Log;
 
 class App {
 
@@ -31,6 +30,8 @@ class App {
 
     private $view;
 
+    private $log;
+
     private $configApp = [];
 
     private $configDb = [];
@@ -42,20 +43,14 @@ class App {
         $this->setConfig();
 
         $this->auth = Auth::getInstance($this->config('session_name'));
-
         $this->router = Router::getInstance();
-
         $this->request = Request::getInstance();
-
         $this->response = Response::getInstance();
-
         $this->db = DB::getInstance();
-
         $this->table = Table::getInstance();
-
         $this->locale = Locale::getInstance();
-
-        $this->view = View::getInstance();
+        $this->log = Log::getInstance();
+//        $this->view = View::getInstance();
 
         $this->makeDbConnections();
 
@@ -64,7 +59,6 @@ class App {
     public function run() {
 
         $this->routing();
-
 
         $this->response->respond();
 
@@ -92,7 +86,16 @@ class App {
         $connections = $this->configDb;
 
         foreach ($connections as $key => $value){
-            DB::pushConnection($key, $value['driver'], $value['host'], $value['port'], $value['database'], $value['username'] . ':' . $value['password'], stristr($value['mode'], 'write'), stristr($value['mode'], 'read'));
+            DB::pushConnection(
+                $key,
+                $value['driver'],
+                $value['host'],
+                $value['port'],
+                $value['database'],
+                $value['username'] . ':' . $value['password'],
+                stristr($value['mode'], 'write'),
+                stristr($value['mode'], 'read')
+            );
         }
         
     }
@@ -106,7 +109,9 @@ class App {
     }
 
     public function config($parameter) {
-        return isset($this->configApp[$parameter]) ? $this->configApp[$parameter] : false;
+        return isset($this->configApp[$parameter]) ?
+            $this->configApp[$parameter] :
+            false;
     }
 
 

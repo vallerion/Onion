@@ -2,13 +2,9 @@
 
 namespace Framework\Http;
 
-use Framework\Helpers\Helper;
 use Framework\Traits\Singleton;
 use Framework\Http\Traits\Codes;
-
 use Psr\Http\Message\ResponseInterface;
-
-use Framework\View\View;
 use InvalidArgumentException;
 
 class Response extends Message implements ResponseInterface {
@@ -40,8 +36,6 @@ class Response extends Message implements ResponseInterface {
         $this->body = $body;
 
         $this->view = View::getInstance();
-
-//        Helper::dumperDie($this->headers);
     }
 
     protected function makeDefaultHeaders($usersData = []) {

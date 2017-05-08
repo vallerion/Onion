@@ -5,9 +5,11 @@
     },
     "autoload": {
         "classmap": [
-            "Framework/",
-            "Controllers/"
+            "Framework/"
         ],
+        "psr-4": {
+            "App\\": "app/"
+        },
         "files": [
             "Framework/functions/functions.php"
         ]
