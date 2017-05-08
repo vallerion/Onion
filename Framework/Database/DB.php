@@ -4,11 +4,8 @@
 namespace Framework\Database;
 
 use Framework\Database\Connection\Connection;
-use Framework\Helpers\Helper;
 use Framework\Traits\Singleton;
 use Framework\Database\Connection\ConnectionPool;
-
-use Framework\Database\ORM;
 
 class DB {
 
@@ -25,28 +22,34 @@ class DB {
 
     public static function pushConnection($nameConnection, $driver, $host, $port, $database, $user, $write = true, $read = true) {
 
-        $connection = new Connection(
-            $nameConnection,
+        list($user, $password) = explode(':', $user);
+
+        $connection = new Database(
             $driver,
             $host,
             $port,
             $database,
             $user,
-            $write,
-            $read
+            $password
         );
+
 
         static::$connectionPool[$nameConnection] = $connection;
 
-        static::setCurrentConnection($nameConnection);
+        static::connection($nameConnection);
     }
 
-    public static function setCurrentConnection($name) {
-        static::$currentConnection = static::$connectionPool[$name];
+    public static function connection($name = null) {
+        if(is_null($name))
+            return static::$currentConnection;
+        else {
+            static::$currentConnection = static::$connectionPool[$name];
+            return static::$instance;
+        }
     }
 
-    public static function getCurrentConnection() {
-        return static::$currentConnection;
+    public static function query($query, $class = null) {
+        return static::$currentConnection->raw($query)->all($class);
     }
 
 

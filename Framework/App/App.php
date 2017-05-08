@@ -60,10 +60,10 @@ class App {
 
         $routeResponse = $this->routing();
 
-        if( ! is_string($routeResponse)) {
-            $this->response->json();
-            $this->response->setBody(json_encode($routeResponse));
-        }
+//        if( ! is_string($routeResponse)) {
+//            $this->response->json();
+//            $this->response->setBody(json_encode($routeResponse));
+//        }
 
         $this->response->respond();
 

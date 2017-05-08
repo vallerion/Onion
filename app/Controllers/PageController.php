@@ -1,7 +1,7 @@
 <?php
 
 use Framework\Controller\Controller;
-use Framework\App\ModuleManager;
+use Framework\Database\DB;
 
 class PageController extends Controller {
 
@@ -11,7 +11,13 @@ class PageController extends Controller {
     }
 
     public function index() {
-        return [ 'a' => 'ararar' ];
+
+        $users = DB::query('
+            select * from users
+        ');
+
+        dumper($users);
+
     }
 
 }
